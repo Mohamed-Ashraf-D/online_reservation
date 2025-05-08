@@ -1,66 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Online Reservation System
 
-## About Laravel
+A Laravel 11-based web application for managing service reservations with separate guards for users and administrators.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Setup Instructions
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-username/online_reservation.git
+   cd online_reservation
+   ```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2. **Install PHP dependencies**:
+   ```bash
+   composer install
+   ```
 
-## Learning Laravel
+3. **Install front-end assets**:
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+4. **Create `.env` and generate key**:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+5. **Configure your `.env` file** (set DB credentials and other environment variables).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+6. **Run database migrations**:
+   ```bash
+   php artisan migrate
+   ```
 
-## Laravel Sponsors
+7. **Serve the application**:
+   ```bash
+   php artisan serve
+   ```
+7. **seed database**:
+   ```bash
+   php artisan db:seed 
+   ```
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+##  Tool Choices & Design Decisions
 
-### Premium Partners
+- **Laravel 11**: latest ease of use, and ecosystem.
+- **Laravel Breeze**: Lightweight for user authentication.
+- **Two Auth Guards**: Separate guards for `user` and `admin` to ensure separate session for each.
+- **Blade Templates**: For clean UI structure.
+- **MySQL**: Preferred for  performance in relational database management system.
+- **Vite**:  fast and modern frontend .
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+##  Known Limitations
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Admin dashboard is functional but minimal — no advanced analytics yet.
+- Currently supports  one language (English).
+- No email verification or password reset yet.
+- still No tests implemented.
 
-## Code of Conduct
+---
+##  Goal of System
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- the goal of this system is to book appointment with expert in the type of session like
+consultation,repair,coaching,expert receive reservation if
+has availability to book on this time and make them done if its done or reject them
+##  Feature Suggestion
+- I can add table to show what is the available time and not available
+to help user to find the suitable time without try date every time.
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+--- 
 
-## License
+##  License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the Mohamed Ashraf github License.

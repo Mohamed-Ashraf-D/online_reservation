@@ -18,7 +18,7 @@
             </li>
 
             <li class="nav-item">
-                <form method="POST" action="{{ route('admin.logout') }}">
+                <form method="POST" action="{{ route('admins.logout') }}">
                     @csrf
                     <input type="submit" value="logout" name="submit">
                 </form>

@@ -14,15 +14,13 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-//        Admin::create([
-//            'name' => 'Admin',
-//            'email' => 'admin@reservation.com',
-//            'password' => Hash::make('password123'),
-//        ]);
+        $admin=Admin::create([
+            'name' => 'Admin',
+            'email' => 'admin@reservation.com',
+            'password' => Hash::make('password123'),
+        ]);
+        $admin->assignRole('super_admin');
 
-        $admin=Admin::find(1);
-        if ($admin->hasRole('admin')) {
-            $admin->removeRole('admin');
-        }
+
     }
 }

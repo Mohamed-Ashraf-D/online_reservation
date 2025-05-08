@@ -37,9 +37,22 @@ class ReservationController extends Controller
         ]);
 
         $timeFrom = Carbon::createFromFormat('H:i', $request->time_from);
-        $timeTo = $timeFrom->copy()->addHour(); // زيادة ساعة
-        $targetRoles = ['user_consultation', 'user_repairs', 'user_coaching'];
+        $timeTo = $timeFrom->copy()->addHour();
+        if($request->service_id == 2){
+            $targetRoles = 'user_consultation';
+        }
+        elseif($request->service_id == 3){
+            $targetRoles = 'user_repairs';
+        }
+        elseif($request->service_id == 4){
+            $targetRoles = 'user_coaching';
+        }else{
+            $targetRoles = ['user_consultation', 'user_repairs', 'user_coaching'];
+
+        }
+
         $adminIds = Admin::role($targetRoles)->pluck('id')->toArray();
+
         $reservationDate = Carbon::parse($request->reservation_date)->startOfDay();
         $today = Carbon::today();
 
@@ -76,7 +89,6 @@ class ReservationController extends Controller
     {
         $reservation = ServiceReservation::findOrFail($id);
 
-        // تأكد إن المستخدم هو صاحب الحجز
         if ($reservation->user_id !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
@@ -85,8 +97,8 @@ class ReservationController extends Controller
         $after24Hours = $reservationDateTime->addHours(24);
 
         $passed24Hours = now()->greaterThanOrEqualTo($after24Hours);
-        if (!$passed24Hours) {
-            return redirect()->back()->with('error', 'Cannot cancel reservation less than 24 hours before time.');
+        if ($passed24Hours) {
+            return redirect()->back()->with('error', 'Cannot cancel reservation that passed 24 hour from booking time.');
         }
 
         $reservation->status = 'cancelled';
@@ -94,5 +106,7 @@ class ReservationController extends Controller
 
         return redirect()->back()->with('success', 'Reservation cancelled successfully.');
     }
+
+
 
 }

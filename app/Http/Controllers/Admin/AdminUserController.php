@@ -20,7 +20,7 @@ class AdminUserController extends Controller
 
     public function create()
     {
-        $roles = Role::where('name', '!=', 'super_admin')->get(); // منع إعطاء نفس الصلاحية
+        $roles = Role::where('name', '!=', 'super_admin')->get();
         return view('admin.admins.create', compact('roles'));
     }
 

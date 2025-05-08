@@ -30,4 +30,13 @@ class ReservationController extends Controller
 
         return redirect()->route('admins.my.reservations')->with('success', 'Reservation marked as done.');
     }
+
+    public function reject($id)
+    {
+        $reservation = ServiceReservation::findOrFail($id);
+        $reservation->status = 'cancelled';
+        $reservation->save();
+
+        return redirect()->back()->with('success', 'Reservation has been rejected.');
+    }
 }

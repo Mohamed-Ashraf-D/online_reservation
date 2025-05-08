@@ -24,7 +24,7 @@ class AuthController extends Controller
                 return redirect()->intended(route('admins.admins-dashboard'));
             }
 
-            if ($admin->hasRole('admin')) {
+            if ($admin->hasRole('super_admin')) {
                 return redirect()->intended(route('admin.dashboard'));
             }
 
@@ -35,14 +35,13 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        $admin = Auth::guard('admin')->user();
-        if ($admin->hasAnyRole(['user_consultation', 'user_repairs', 'user_coaching'])) {
-            return redirect()->intended(route('admin.login'));
-        }
-
         Auth::guard('admin')->logout();
-        return redirect()->route('admin.login');
+
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/admin/login');
     }
 }

@@ -11,7 +11,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::where('is_available', true)->get();
+        $services = Service::get();
         return view('user.services.index', compact('services'));
     }
 
